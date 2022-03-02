@@ -51,9 +51,11 @@ public class Main
             System.out.println("Введите число с " + i + " индексом:");
             nums[i] = scanner.nextInt();
         }
+        int ch1 = nums.length;
+        int ch2 = ch1 - 5;
         System.out.println("Исходный массив: " + Arrays.toString(nums));
-        int[] nums1 = Arrays.copyOfRange(nums, 0, nums.length/2);
-        int[] nums2 = Arrays.copyOfRange(nums, nums.length/2, nums.length);
+        int[] nums1 = Arrays.copyOfRange(nums, 0, ch2);
+        int[] nums2 = Arrays.copyOfRange(nums, ch2, nums.length);
         int low = 0;
         int high = nums2.length - 1;
         quickSort(nums2, low, high);
@@ -63,10 +65,15 @@ public class Main
             nums2[i] = nums2[nums2.length - i - 1];
             nums2[nums2.length - i - 1] = temp;
         }
-        int[] nums3 = new int[nums1.length+nums2.length];
-        System.arraycopy(nums1, 0, nums3, 0, nums1.length);
-        if (nums3.length - (nums3.length - nums1.length) >= 0)
-            System.arraycopy(nums2, nums3.length - nums1.length - nums1.length, nums3, nums3.length - nums1.length, nums3.length - (nums3.length - nums1.length));
+        int[]nums3 = new int[nums1.length+nums2.length];
+        int count = 0;
+        for(int i = 0; i<nums1.length; i++) {
+            nums3[i] = nums1[i];
+            count++;
+        }
+        for (int k : nums2) {
+            nums3[count++] = k;
+        }
 
         System.out.println("Отсортерованный массив: " + Arrays.toString(nums3));
 
